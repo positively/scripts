@@ -1,0 +1,38 @@
+#!/bin/bash
+# Switching Java versions via CLI
+# Location: /usr/local/bin/setjdk
+
+main_case() {
+  echo -e "Run with arguments: setjdk \e[31m(8|11)\e[0m"
+  exit
+}
+
+switch_to_jdk8() {
+  # Switch to java-8:
+  update-alternatives --config java <<< 1 > /dev/null
+  update-alternatives --config jre_openjdk <<< 1 > /dev/null
+  update-alternatives --config javac <<< 1 > /dev/null
+  update-alternatives --config java_sdk_openjdk <<< 1 > /dev/null
+  exit
+}
+
+switch_to_jdk11() {
+  # Switch to java-11:
+  update-alternatives --config java <<< 2 > /dev/null
+  update-alternatives --config jre_openjdk <<< 2 > /dev/null
+  update-alternatives --config javac <<< 2 > /dev/null
+  update-alternatives --config java_sdk_openjdk <<< 2 > /dev/null
+  exit
+}
+
+case $1 in
+  8)
+    switch_to_jdk8
+    ;;
+  11)
+    switch_to_jdk11
+    ;;
+  *)
+    main_case
+    ;;
+esac
